@@ -22,7 +22,7 @@ const plugin: NxPluginV2 = {
           ?.projects as ProjectConfiguration[])
     )) {
       const bufTask = Object.values(config.targets ?? {}).find(
-        (target) => target.executor === "nx-buf:generate"
+        (target) => target.executor === "@gorilainvest/nx-buf:generate"
       ) as TargetConfiguration<GenerateExecutorSchema> | undefined;
       if (!bufTask?.options) continue;
 

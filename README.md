@@ -8,7 +8,7 @@ using [Buf](http://buf.build).
 To install this plugin, run the following command:
 
 ```sh
-npm install nx-buf
+npm install @gorilainvest/nx-buf
 ```
 
 And add it to the list of plugins in `nx.json`:
@@ -18,7 +18,7 @@ And add it to the list of plugins in `nx.json`:
   // ...
   "plugins": [
     // ...
-    "nx-buf"
+    "@gorilainvest/nx-buf"
   ]
 }
 ```
@@ -29,14 +29,14 @@ This plugin assumes that you have a separate Nx project in your workspace that c
 
 ### Linting
 
-To enable linting a `buf` project, use the `nx-buf:lint` executor in that project's `project.json`:
+To enable linting a `buf` project, use the `@gorilainvest/nx-buf:lint` executor in that project's `project.json`:
 
 ```jsonc
 {
   // ...
   "targets": {
     "lint": {
-      "executor": "nx-buf:lint"
+      "executor": "@gorilainvest/nx-buf:lint"
     }
   }
 }
@@ -44,14 +44,14 @@ To enable linting a `buf` project, use the `nx-buf:lint` executor in that projec
 
 ### Codegen
 
-To generate source files from a `buf` project into another project, use the `nx-buf:generate` executor in the destination project:
+To generate source files from a `buf` project into another project, use the `@gorilainvest/nx-buf:generate` executor in the destination project:
 
 ```jsonc
 {
   // ...
   "targets": {
     "proto-gen": {
-      "executor": "nx-buf:generate",
+      "executor": "@gorilainvest/nx-buf:generate",
       "outputs": ["{projectRoot}/{options.copyTo}"],
       "options": {
         "srcProject": "proto",
@@ -75,4 +75,4 @@ The options are as follows:
 
 ### Dependency graph
 
-This plugin will automatically establish a dependency between any project that contain a `nx-buf:generate` target and the respective project specified in `options.srcProject`.
+This plugin will automatically establish a dependency between any project that contain a `@gorilainvest/nx-buf:generate` target and the respective project specified in `options.srcProject`.

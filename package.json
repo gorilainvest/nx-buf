@@ -1,5 +1,5 @@
 {
-  "name": "nx-buf",
+  "name": "@gorilainvest/nx-buf",
   "version": "1.0.0",
   "type": "commonjs",
   "main": "./src/index.js",

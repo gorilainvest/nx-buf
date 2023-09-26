@@ -1,0 +1,21 @@
+{
+  "name": "nx-buf",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "executors": "./executors.json",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^20.7.0",
+    "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "@nx/devkit": "^16.7",
+    "nx": "^16.7"
+  },
+  "dependencies": {
+    "glob": "^10.3.9"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "version": 2,
+  "title": "Generate executor",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "srcProject": {
+      "type": "string",
+      "description": "Project in the Nx workspace from where to run buf."
+    },
+    "copyFrom": {
+      "type": "array",
+      "description": "The patterns of generated source files to copy, relative to `srcProject`."
+    },
+    "copyTo": {
+      "type": "string",
+      "description": "The output directory, relative to the current project root."
+    }
+  },
+  "required": ["srcProject", "copyFrom", "copyTo"]
+}

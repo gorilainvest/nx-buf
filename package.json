@@ -16,6 +16,7 @@
     "nx": "^16.7"
   },
   "dependencies": {
+    "@bufbuild/buf": "^1.26.1",
     "glob": "^10.3.9"
   }
 }

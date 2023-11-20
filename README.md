@@ -56,7 +56,8 @@ To generate source files from a `buf` project into another project, use the `@go
       "options": {
         "srcProject": "proto",
         "copyFrom": ["gen/*"],
-        "copyTo": "src/gen"
+        "copyTo": "src/gen",
+        "options": "--include-imports"
       }
     },
     "build": {
@@ -72,6 +73,7 @@ The options are as follows:
 * `srcProject`: the project from where to grab the generated sources after running `buf generate`.
 * `copyFrom`: a list of glob patterns to copy from that project, relative to its root.
 * `copyTo`: the destination folder, relative to the target project.
+* `options`: (optional) additional command-line arguments to pass to `buf generate`.
 
 ### Dependency graph
 

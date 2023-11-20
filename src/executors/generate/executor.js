@@ -28,7 +28,7 @@ const promises_1 = require("fs/promises");
 const path = __importStar(require("path"));
 const glob_1 = require("glob");
 const devkit_1 = require("@nx/devkit");
-async function runExecutor({ srcProject, copyFrom, copyTo }, context) {
+async function runExecutor({ srcProject, copyFrom, copyTo, options }, context) {
     try {
         // Check if the source project exists in the project graph
         if (!(srcProject in context.projectGraph.nodes))
@@ -37,10 +37,14 @@ async function runExecutor({ srcProject, copyFrom, copyTo }, context) {
         const targetProjectRoot = path.join(context.root, context.projectGraph.nodes[context.projectName]?.data.root);
         // Set the current working directory to the root directory of the source project
         const cwd = path.join(context.root, protoRoot);
+        // Build the 'buf generate' command to be run
+        let command = `npx buf generate`;
+        if (typeof options === "string")
+            command += ` ${options}`;
         // Run the 'buf generate' command in the current working directory
         if (context.isVerbose)
-            devkit_1.logger.info(`running 'buf generate' on ${cwd}...`);
-        await new Promise((resolve, reject) => (0, child_process_1.exec)(`npx buf generate`, { cwd }, (error, stdout, stderr) => {
+            devkit_1.logger.info(`running '${command}' on ${cwd}...`);
+        await new Promise((resolve, reject) => (0, child_process_1.exec)(command, { cwd }, (error, stdout, stderr) => {
             if (error) {
                 devkit_1.logger.error(stdout);
                 devkit_1.logger.error(stderr);

@@ -6,7 +6,7 @@ import { ExecutorContext, logger } from "@nx/devkit";
 import { GenerateExecutorSchema } from "./schema";
 
 export default async function runExecutor(
-  { srcProject, copyFrom, copyTo }: GenerateExecutorSchema,
+  { srcProject, copyFrom, copyTo, options }: GenerateExecutorSchema,
   context: ExecutorContext
 ) {
   try {
@@ -26,10 +26,14 @@ export default async function runExecutor(
     // Set the current working directory to the root directory of the source project
     const cwd = path.join(context.root, protoRoot);
 
+    // Build the 'buf generate' command to be run
+    let command = `npx buf generate`;
+    if (typeof options === "string") command += ` ${options}`;
+
     // Run the 'buf generate' command in the current working directory
-    if (context.isVerbose) logger.info(`running 'buf generate' on ${cwd}...`);
+    if (context.isVerbose) logger.info(`running '${command}' on ${cwd}...`);
     await new Promise<void>((resolve, reject) =>
-      exec(`npx buf generate`, { cwd }, (error, stdout, stderr) => {
+      exec(command, { cwd }, (error, stdout, stderr) => {
         if (error) {
           logger.error(stdout);
           logger.error(stderr);

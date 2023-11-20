@@ -16,6 +16,10 @@
     "copyTo": {
       "type": "string",
       "description": "The output directory, relative to the current project root."
+    },
+    "options": {
+      "type": "string",
+      "description": "Additional command-line options to pass to `buf generate`."
     }
   },
   "required": ["srcProject", "copyFrom", "copyTo"]

@@ -27,11 +27,18 @@ const fs_1 = require("fs");
 const path = __importStar(require("path"));
 const plugin = {
     name: "nx-buf",
-    createDependencies(context) {
+    createDependencies(...args) {
+        const projectMap = args.length === 2
+            ? args[1].projects
+            : "projects" in args[0]
+                ? args[0].projects
+                : args[0].projectsConfigurations?.projects;
+        if (!projectMap) {
+            devkit_1.logger.warn("Could not find project map");
+            return [];
+        }
         const deps = [];
-        for (const [project, config] of Object.entries(context.projects ??
-            context.projectsConfigurations // compat with 16.7
-                ?.projects)) {
+        for (const [project, config] of Object.entries(projectMap)) {
             const bufTask = Object.values(config.targets ?? {}).find((target) => target.executor === "@gorilainvest/nx-buf:generate");
             if (!bufTask?.options)
                 continue;

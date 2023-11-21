@@ -12,8 +12,8 @@
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
-    "@nx/devkit": "^16.7",
-    "nx": "^16.7"
+    "@nx/devkit": "^17.1.2",
+    "nx": "^17.1.2"
   },
   "dependencies": {
     "@bufbuild/buf": "^1.26.1",

@@ -4,9 +4,14 @@ import { ExecutorContext, logger } from "@nx/devkit";
 import { PushExecutorSchema } from "./schema";
 
 export default async function runExecutor(
-  _: PushExecutorSchema,
+  { dryRun }: PushExecutorSchema,
   context: ExecutorContext
 ) {
+  if (dryRun) {
+    if (context.isVerbose)
+      logger.info("Not running 'buf push' because the 'dryRun' flag is set.");
+    return { success: true };
+  }
   try {
     const protoRoot = path.join(
       context.root,

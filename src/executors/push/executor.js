@@ -26,7 +26,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const child_process_1 = require("child_process");
 const path = __importStar(require("path"));
 const devkit_1 = require("@nx/devkit");
-async function runExecutor(_, context) {
+async function runExecutor({ dryRun }, context) {
+    if (dryRun) {
+        if (context.isVerbose)
+            devkit_1.logger.info("Not running 'buf push' because the 'dryRun' flag is set.");
+        return { success: true };
+    }
     try {
         const protoRoot = path.join(context.root, context.projectGraph.nodes[context.projectName]?.data.root);
         // Set the current working directory to the root directory of the source project

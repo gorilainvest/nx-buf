@@ -4,6 +4,11 @@
   "title": "Push executor",
   "description": "",
   "type": "object",
-  "properties": {},
+  "properties": {
+    "dryRun": {
+      "type": "boolean",
+      "description": "If true, the executor will not actually push the changes to the remote repository."
+    }
+  },
   "required": []
 }

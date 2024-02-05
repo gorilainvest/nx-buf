@@ -1,1 +1,3 @@
-export interface PushExecutorSchema {}
+export interface PushExecutorSchema {
+  dryRun?: boolean;
+}

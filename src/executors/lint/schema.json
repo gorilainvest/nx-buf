@@ -4,5 +4,10 @@
   "title": "Lint executor",
   "description": "",
   "type": "object",
-  "properties": {}
+  "properties": {
+    "options": {
+      "type": "string",
+      "description": "Additional command-line options to pass to `buf lint`."
+    }
+  }
 }

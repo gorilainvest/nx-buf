@@ -4,7 +4,7 @@ import { ExecutorContext, logger } from "@nx/devkit";
 import * as path from "path";
 
 export default async function runExecutor(
-  _: LintExecutorSchema,
+  { options }: LintExecutorSchema,
   context: ExecutorContext
 ) {
   try {
@@ -13,8 +13,12 @@ export default async function runExecutor(
       context.projectGraph!.nodes[context.projectName!]?.data.root
     );
 
+    // Build the 'buf lint' command to be run
+    let command = `npx buf lint`;
+    if (typeof options === "string") command += ` ${options}`;
+
     await new Promise<void>((resolve, reject) =>
-      exec(`npx buf lint`, { cwd }, (error, stdout, stderr) => {
+      exec(command, { cwd }, (error, stdout, stderr) => {
         if (error) {
           logger.error(stdout);
           logger.error(stderr);

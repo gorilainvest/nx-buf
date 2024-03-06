@@ -26,10 +26,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const child_process_1 = require("child_process");
 const devkit_1 = require("@nx/devkit");
 const path = __importStar(require("path"));
-async function runExecutor(_, context) {
+async function runExecutor({ options }, context) {
     try {
         const cwd = path.join(context.root, context.projectGraph.nodes[context.projectName]?.data.root);
-        await new Promise((resolve, reject) => (0, child_process_1.exec)(`npx buf lint`, { cwd }, (error, stdout, stderr) => {
+        // Build the 'buf lint' command to be run
+        let command = `npx buf lint`;
+        if (typeof options === "string")
+            command += ` ${options}`;
+        await new Promise((resolve, reject) => (0, child_process_1.exec)(command, { cwd }, (error, stdout, stderr) => {
             if (error) {
                 devkit_1.logger.error(stdout);
                 devkit_1.logger.error(stderr);
